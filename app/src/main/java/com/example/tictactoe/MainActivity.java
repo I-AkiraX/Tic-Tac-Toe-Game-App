@@ -3,13 +3,17 @@ package com.example.tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
 import androidx.gridlayout.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tictactoe.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+    ActivityMainBinding binding;
 
     //0:red 1:yellow
     private int player = 0;
@@ -80,10 +84,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        message = (TextView) findViewById(R.id.textView);
-        btn = (Button) findViewById(R.id.button);
+        message = binding.textView;
+        btn = binding.button;
         btn.setTranslationY(1000);
         grid();
 
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void grid(){
-        grd = (GridLayout) findViewById(R.id.board);
+        grd = binding.board;
         grd.setAlpha(0);
         grd.setScaleX(0);
         grd.setScaleY(0);
